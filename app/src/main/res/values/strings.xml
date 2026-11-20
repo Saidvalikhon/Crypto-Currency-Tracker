@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Cryptocurrency Tracker</string>
+
+    <string name="coin_list_title">Рынок</string>
+    <string name="action_retry">Повторить</string>
+    <string name="coin_list_empty">Ничего не найдено</string>
+    <string name="cd_refresh">Обновить</string>
+    <string name="cd_settings">Настройки</string>
+    <string name="error_network">Нет подключения к сети</string>
+    <string name="error_timeout">Сервер долго не отвечает</string>
+    <string name="error_http">Сервер вернул ошибку (код %1$d)</string>
+    <string name="error_http_rate_limit">Слишком много запросов, подожди немного</string>
+    <string name="error_database">Ошибка хранилища данных</string>
+    <string name="error_unknown">Что-то пошло не так</string>
+</resources>
