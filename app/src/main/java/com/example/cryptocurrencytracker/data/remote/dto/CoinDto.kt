@@ -11,7 +11,7 @@ data class CoinDto(
     val image: String? = null,
     @SerialName("current_price")
     val currentPrice: Double? = null,
-    @SerialName("price_change_percentage_day")
+    @SerialName("price_change_percentage_24h")
     val priceChangePercentageDay: Double? = null,
     @SerialName("market_cap_rank")
     val marketCapRank: Int? = null

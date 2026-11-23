@@ -13,7 +13,7 @@ fun CoinListRoute(
 
     CoinListScreen(
         state = state,
-        onRetry = viewModel::loadCoins,
+        onRetry = viewModel::refresh,
         onCoinClick = onCoinClick
     )
 }

@@ -4,6 +4,9 @@ import com.example.cryptocurrencytracker.domain.model.AppError
 import com.example.cryptocurrencytracker.domain.model.Coin
 import com.example.cryptocurrencytracker.domain.repository.CoinRepository
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 enum class FakeMode {
     SUCCESS,
@@ -18,9 +21,12 @@ class FakeCoinRepository(
     private val delayMillis: Long = 1500L
 ) : CoinRepository {
 
+    private val coins = MutableStateFlow<List<Coin>>(emptyList())
     private var callCount = 0
 
-    override suspend fun getCoins(): List<Coin> {
+    override fun observeCoins(): Flow<List<Coin>> = coins.asStateFlow()
+
+    override suspend fun refresh() {
         delay(delayMillis)
         callCount++
 
@@ -32,7 +38,7 @@ class FakeCoinRepository(
             FakeMode.ALTERNATING -> if (callCount % 2 == 0) throw AppError.Network()
         }
 
-        return sampleCoins
+        coins.value = sampleCoins
     }
 
     private val sampleCoins = listOf(
