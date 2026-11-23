@@ -18,7 +18,14 @@ class AppContainer(context: Context) {
     }
 
     private val remote by lazy { CoinRemoteDataSource(NetworkProvider.coinApi) }
-    private val local by lazy { CoinLocalDataSource(database, database.coinDao()) }
+    private val local by lazy {
+        CoinLocalDataSource(
+            db = database,
+            dao = database.coinDao(),
+            favoriteDao = database.favoriteDao(),
+            priceHistoryDao = database.priceHistoryDao()
+        )
+    }
 
     val coinRepository: CoinRepository by lazy { CoinRepositoryImpl(remote, local) }
 }

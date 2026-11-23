@@ -29,7 +29,6 @@ val DarkCryptoColors = CryptoColors(
 
 val LocalCryptoColors = staticCompositionLocalOf { LightCryptoColors }
 
-// Использование: MaterialTheme.cryptoColors.positive
 val MaterialTheme.cryptoColors: CryptoColors
     @Composable
     @ReadOnlyComposable

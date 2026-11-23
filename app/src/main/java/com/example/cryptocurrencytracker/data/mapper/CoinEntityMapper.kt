@@ -20,5 +20,5 @@ fun Coin.toEntity(): CoinEntity = CoinEntity(
     imageUrl = imageUrl,
     price = price,
     priceChangeDay = priceChangeDay,
-    marketCapRank = marketCapRank
+    marketCapRank = marketCapRank,
 )

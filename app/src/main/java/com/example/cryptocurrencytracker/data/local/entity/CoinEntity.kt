@@ -16,5 +16,6 @@ data class CoinEntity(
     @ColumnInfo(name = "price_change_day")
     val priceChangeDay: Double,
     @ColumnInfo(name = "market_cap_rank")
-    val marketCapRank: Int
+    val marketCapRank: Int,
+
 )

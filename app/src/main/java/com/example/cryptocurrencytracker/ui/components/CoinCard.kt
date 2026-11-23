@@ -12,15 +12,21 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.cryptocurrencytracker.R
 import com.example.cryptocurrencytracker.domain.model.Coin
 import com.example.cryptocurrencytracker.ui.common.formatPrice
 import com.example.cryptocurrencytracker.ui.theme.CryptocurrencyTrackerTheme
@@ -29,6 +35,7 @@ import com.example.cryptocurrencytracker.ui.theme.CryptocurrencyTrackerTheme
 fun CoinCard(
     coin: Coin,
     onClick: () -> Unit,
+    onFavoriteClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -40,7 +47,7 @@ fun CoinCard(
             .background(MaterialTheme.colorScheme.surface)
             .clickable(onClick = onClick)
             .heightIn(min = 64.dp)
-            .padding(horizontal = 14.dp, vertical = 12.dp)
+            .padding(start = 14.dp, top = 12.dp, bottom = 12.dp, end = 4.dp)
     ) {
         Text(
             text = coin.marketCapRank.toString(),
@@ -77,6 +84,20 @@ fun CoinCard(
             Spacer(modifier = Modifier.height(4.dp))
             ChangeBadge(change = coin.priceChangeDay)
         }
+
+        IconButton(onClick = onFavoriteClick) {
+            Icon(
+                imageVector = Icons.Filled.Star,
+                contentDescription = stringResource(
+                    if (coin.isFavorite) R.string.favorite_remove else R.string.favorite_add
+                ),
+                tint = if (coin.isFavorite) {
+                    MaterialTheme.colorScheme.primary
+                } else {
+                    MaterialTheme.colorScheme.outline
+                }
+            )
+        }
     }
 }
 
@@ -86,7 +107,20 @@ private fun CoinCardUpPreview() {
     CryptocurrencyTrackerTheme {
         CoinCard(
             coin = Coin("bitcoin", "Bitcoin", "btc", "", 67420.0, 1.8, 1),
-            onClick = {}
+            onClick = {},
+            onFavoriteClick = {}
+        )
+    }
+}
+
+@Preview(name = "Избранное")
+@Composable
+private fun CoinCardFavoritePreview() {
+    CryptocurrencyTrackerTheme {
+        CoinCard(
+            coin = Coin("bitcoin", "Bitcoin", "btc", "", 67420.0, 1.8, 1, isFavorite = true),
+            onClick = {},
+            onFavoriteClick = {}
         )
     }
 }
@@ -97,7 +131,8 @@ private fun CoinCardDownPreview() {
     CryptocurrencyTrackerTheme {
         CoinCard(
             coin = Coin("long", "Very Long Coin Name Protocol Token", "vlcnp", "", 0.52, -3.1, 120),
-            onClick = {}
+            onClick = {},
+            onFavoriteClick = {}
         )
     }
 }

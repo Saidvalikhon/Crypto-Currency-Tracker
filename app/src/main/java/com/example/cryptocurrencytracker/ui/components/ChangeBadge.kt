@@ -17,7 +17,8 @@ import kotlin.math.round
 @Composable
 fun ChangeBadge(
     change: Double,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    suffix: String = ""
 ) {
     val crypto = MaterialTheme.cryptoColors
     val colors = MaterialTheme.colorScheme
@@ -41,8 +42,10 @@ fun ChangeBadge(
         else -> ""
     }
 
+    val suffixText = if (suffix.isEmpty()) "" else " $suffix"
+
     Text(
-        text = arrow + formatPercent(change, showSign = false),
+        text = arrow + formatPercent(change, showSign = false) + suffixText,
         color = contentColor,
         style = MaterialTheme.typography.labelMedium,
         modifier = modifier

@@ -7,5 +7,6 @@ data class Coin(
     val imageUrl: String,
     val price: Double,
     val priceChangeDay: Double,
-    val marketCapRank: Int
+    val marketCapRank: Int,
+    val isFavorite: Boolean = false
 )
